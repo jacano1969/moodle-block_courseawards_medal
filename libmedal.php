@@ -17,7 +17,7 @@
 /**
  * Functions for use with the medal block
  *
- * @package    block_courseaward_medal
+ * @package    block_courseawards_medal
  * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ function has_medal($course) {
     }
 
     global $DB;
-    return $DB->record_exists('block_courseaward_medal', array(
+    return $DB->record_exists('block_courseawards_medal', array(
         'course_id' => $course,
         'deleted'   => 0,
     ));
@@ -44,7 +44,7 @@ function get_medal($course) {
     }
 
     global $DB;
-    $res = $DB->get_record('block_courseaward_medal', array(
+    $res = $DB->get_record('block_courseawards_medal', array(
         'course_id' => $course,
         'deleted'   => 0,
     ));
@@ -54,14 +54,14 @@ function get_medal($course) {
 // Returns the path to the image based on a specific input or returns false on fail.
 function get_medal_img($medal) {
     global $CFG;
-    $imgpath = $CFG->wwwroot.'/blocks/courseaward_medal/img/';
+    $imgpath = $CFG->wwwroot.'/blocks/courseawards_medal/img/';
 
     if (empty($medal)) {
         return false;
     }
 
     $imgmod = '';
-    if (get_config('courseaward_medal', 'size') == 'small') {
+    if (get_config('courseawards_medal', 'size') == 'small') {
         $imgmod = '_sm';
     }
 
@@ -82,7 +82,7 @@ function get_medal_img($medal) {
 // Get the medal ID.
 function get_medal_id($course) {
     global $DB;
-    $res = $DB->get_record('block_courseaward_medal', array(
+    $res = $DB->get_record('block_courseawards_medal', array(
         'course_id' => $course,
         'deleted'   => 0,
     ));
@@ -92,7 +92,7 @@ function get_medal_id($course) {
 // Get the medal date awarded.
 function get_medal_date($course) {
     global $DB;
-    $res = $DB->get_record('block_courseaward_medal', array(
+    $res = $DB->get_record('block_courseawards_medal', array(
         'course_id' => $course,
         'deleted'   => 0,
     ));
@@ -102,15 +102,15 @@ function get_medal_date($course) {
 // Get the history of awards.
 function get_course_medal_history($cid) {
     global $DB;
-    $res = $DB->get_records_select('block_courseaward_medal', 'course_id = \''.$cid.'\'', array(
+    $res = $DB->get_records_select('block_courseawards_medal', 'course_id = \''.$cid.'\'', array(
         'date_added DESC',
         'medal, date_added'
     ));
 
     if ($res) {
         $build = '<div class="center smaller cleartop">
-        <a href="javascript:hideshow(document.getElementById(\'courseaward_medal_history\'))">'.
-            get_string('admin-history', 'block_courseaward_medal').'</a>
+        <a href="javascript:hideshow(document.getElementById(\'courseawards_medal_history\'))">'.
+            get_string('admin-history', 'block_courseawards_medal').'</a>
         </div>
         <script type="text/javascript">
             function hideshow(which){
@@ -122,7 +122,7 @@ function get_course_medal_history($cid) {
                 which.style.display="block"
         }
         </script>
-        <div id="courseaward_medal_history" class="cleartop" style="display: none;"><ul>'."\n";
+        <div id="courseawards_medal_history" class="cleartop" style="display: none;"><ul>'."\n";
 
         foreach ($res as $row) {
             if (!empty($row->medal)) {
@@ -134,6 +134,6 @@ function get_course_medal_history($cid) {
 
         return $build;
     } else {
-        return '<div class="center smaller cleartop">'.get_string('admin-nohistory', 'block_courseaward_medal').'</div>';
+        return '<div class="center smaller cleartop">'.get_string('admin-nohistory', 'block_courseawards_medal').'</div>';
     }
 }

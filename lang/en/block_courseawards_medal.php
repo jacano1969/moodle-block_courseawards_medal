@@ -17,7 +17,7 @@
 /**
  * Language strings for medal block
  *
- * @package    block_courseaward_medal
+ * @package    block_courseawards_medal
  * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -59,4 +59,4 @@ $string['error-courseidnotset'] = 'Course ID not set, for some reason.';
 $string['error-useridnotset'] = 'User ID not set, for some reason.';
 
 // Capabilities strings.
-$string['courseaward_medal:admin'] = 'Administrate the Course Awards - Medal block';
+$string['courseawards_medal:admin'] = 'Administrate the Course Awards - Medal block';

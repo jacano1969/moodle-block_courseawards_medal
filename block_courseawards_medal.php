@@ -17,15 +17,15 @@
 /**
  * Course Award Medal block
  *
- * @package    block_courseaward_medal
+ * @package    block_courseawards_medal
  * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class block_courseaward_medal extends block_base {
+class block_courseawards_medal extends block_base {
 
     public function init() {
-        $this->title = get_string('pluginname', 'block_courseaward_medal');
+        $this->title = get_string('pluginname', 'block_courseawards_medal');
     }
 
     public function instance_allow_multiple() {
@@ -44,37 +44,37 @@ class block_courseaward_medal extends block_base {
         global $CFG, $COURSE, $USER;
 
         $build = '';
-        $pathtoblock = $CFG->wwwroot.'/blocks/courseaward_medal/';
+        $pathtoblock = $CFG->wwwroot.'/blocks/courseawards_medal/';
 
-        require_once($CFG->dirroot.'/blocks/courseaward_medal/libmedal.php');
+        require_once($CFG->dirroot.'/blocks/courseawards_medal/libmedal.php');
 
         // Show the medal awarded, if there is one.
         if (has_medal($COURSE->id)) {
             $build .= '<div class="center bgborder"><img src="'.get_medal_img(get_medal($COURSE->id)).'" /></div>'."\n";
             $build .= '<div class="center"><span class="awardtitle">'.get_string('medal-'.get_medal($COURSE->id),
-                'block_courseaward_medal').'</span>';
-            $build .= '<br /><span class="smaller">'.get_string('user-awardedon', 'block_courseaward_medal').' '.
+                'block_courseawards_medal').'</span>';
+            $build .= '<br /><span class="smaller">'.get_string('user-awardedon', 'block_courseawards_medal').' '.
                 date('jS F Y', get_medal_date($COURSE->id)).'</span></div>'."\n";
         }
 
-        if (has_capability('block/courseaward_medal:admin', get_context_instance(CONTEXT_COURSE, $COURSE->id))) {
+        if (has_capability('block/courseawards_medal:admin', get_context_instance(CONTEXT_COURSE, $COURSE->id))) {
 
             // User has the 'admin' capability and can assign/remove medals.
             if (has_medal($COURSE->id)) {
                 // If the course has a medal, provide options to delete it.
                 $build .= "\n".'<div class="center smaller cleartop"><a href="'.$pathtoblock.'admin_unmedal.php?cid='.
-                    $COURSE->id.'">'.get_string('admin-medaldel', 'block_courseaward_medal').'</a></div>';
+                    $COURSE->id.'">'.get_string('admin-medaldel', 'block_courseawards_medal').'</a></div>';
             } else {
                 // If the course doesn't have a medal, provide options to set one.
                 $build .= "\n".'<div class="center smaller">';
                 $build .= '<a href="'.$pathtoblock.'admin_medal.php?cid='.$COURSE->id.'&medal=gold">'.
-                    get_string('admin-medaladdgold', 'block_courseaward_medal').'</a><br />'."\n";
+                    get_string('admin-medaladdgold', 'block_courseawards_medal').'</a><br />'."\n";
                 $build .= '<a href="'.$pathtoblock.'admin_medal.php?cid='.$COURSE->id.'&medal=silver">'.
-                    get_string('admin-medaladdsilver', 'block_courseaward_medal').'</a><br />'."\n";
+                    get_string('admin-medaladdsilver', 'block_courseawards_medal').'</a><br />'."\n";
                 $build .= '<a href="'.$pathtoblock.'admin_medal.php?cid='.$COURSE->id.'&medal=bronze">'.
-                    get_string('admin-medaladdbronze', 'block_courseaward_medal').'</a><br />'."\n";
+                    get_string('admin-medaladdbronze', 'block_courseawards_medal').'</a><br />'."\n";
                 $build .= '<a href="'.$pathtoblock.'admin_medal.php?cid='.$COURSE->id.'&medal=achievement">'.
-                    get_string('admin-medaladdachievement', 'block_courseaward_medal').'</a>';
+                    get_string('admin-medaladdachievement', 'block_courseawards_medal').'</a>';
                 $build .= '</div>';
             }
             $build .= get_course_medal_history($COURSE->id);

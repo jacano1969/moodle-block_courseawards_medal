@@ -17,7 +17,7 @@
 /**
  * Adds a medal
  *
- * @package    block_courseaward_medal
+ * @package    block_courseawards_medal
  * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,21 +29,21 @@ defined('MOODLE_INTERNAL') || die;
 require_login();
 
 if (!$COURSE = $DB->get_record('course', array('id' => required_param('cid', PARAM_INT)))) {
-    print_error(get_string('error-courseidnotset', 'block_courseaward_medal'));
+    print_error(get_string('error-courseidnotset', 'block_courseawards_medal'));
 }
 
 $medal = required_param('medal', PARAM_NOTAGS);
 
 if (!$USER->id) {
-    print_error(get_string('error-useridnotset', 'block_courseaward_medal'));
+    print_error(get_string('error-useridnotset', 'block_courseawards_medal'));
 }
 
-if (!has_capability('block/courseaward_medal:admin', get_context_instance(CONTEXT_COURSE, $COURSE->id))) {
-    print_error(get_string('error-notadmin', 'block_courseaward_medal'));
+if (!has_capability('block/courseawards_medal:admin', get_context_instance(CONTEXT_COURSE, $COURSE->id))) {
+    print_error(get_string('error-notadmin', 'block_courseawards_medal'));
 }
 
 if ($medal != 'gold' && $medal != 'silver' && $medal != 'bronze' && $medal != 'achievement' ) {
-    print_error(get_string('error-badmedaltype', 'block_courseaward_medal'));
+    print_error(get_string('error-badmedaltype', 'block_courseawards_medal'));
 }
 
 $now = time();
@@ -54,8 +54,8 @@ $dbinsert->medal            = $medal;
 $dbinsert->date_added       = $now;
 $dbinsert->date_modified    = $now;
 
-if (!$DB->insert_record('block_courseaward_medal', $dbinsert)) {
-    print_error(get_string('error-dbinsert', 'block_courseaward_medal'));
+if (!$DB->insert_record('block_courseawards_medal', $dbinsert)) {
+    print_error(get_string('error-dbinsert', 'block_courseawards_medal'));
 } else {
     redirect($CFG->wwwroot.'/course/view.php?id='.$COURSE->id);
 }

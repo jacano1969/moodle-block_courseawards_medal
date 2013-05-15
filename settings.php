@@ -17,7 +17,7 @@
 /**
  * Configuration page for the medal block
  *
- * @package    block_courseaward_medal
+ * @package    block_courseawards_medal
  * @copyright  2011 onwards Paul Vaughan, paulvaughan@southdevon.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,9 +32,9 @@ if ($ADMIN->fulltree) {
     );
 
     $settings->add(new admin_setting_configselect(
-        'courseaward_medal/size',
-        get_string('config_size', 'block_courseaward_medal'),
-        get_string('config_size_long', 'block_courseaward_medal'),
+        'courseawards_medal/size',
+        get_string('config_size', 'block_courseawards_medal'),
+        get_string('config_size_long', 'block_courseawards_medal'),
         'regular',
         $sizes)
     );
